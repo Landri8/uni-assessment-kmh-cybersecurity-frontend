@@ -49,15 +49,17 @@ const EmailVerificationScreen = () => {
 
             postRequest('/verify_email', requestBody).then(({data}) => {
                 if (data?.statuscode === 200) {
-                    toast.success('Email verified')
+                    
                     dispatch(setEmailVerified(true))
 
                     if (login && login == true) {
+                        toast.success('Email verified')
                         Cookies.set('access_token', data?.access_token)
                         Cookies.set('refresh_token', data?.refresh_token)
                         navigator('/')
                     } else{
-                        navigator('/add_phone')
+                        toast.success('Account created successfully')
+                        navigator('/login')
                     }
                 } else if (data?.statuscode === 400) {
                     setErrorMessage(data?.message);

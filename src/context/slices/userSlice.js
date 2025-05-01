@@ -5,7 +5,6 @@ const initialState = {
     email: null,
     email_verified: false,
     id: null,
-    phone: null
 }
 
 const userSlice = createSlice({
@@ -28,10 +27,6 @@ const userSlice = createSlice({
             state.id = payload;
         },
 
-        setPhone: (state, {payload}) => {
-            state.phone = payload;
-        },
-
         clearSession: (state) => {
             state = initialState
         }
@@ -43,7 +38,6 @@ export const {
     setEmail,
     setEmailVerified,
     setId,
-    setPhone,
     clearSession
  } = userSlice.actions
 

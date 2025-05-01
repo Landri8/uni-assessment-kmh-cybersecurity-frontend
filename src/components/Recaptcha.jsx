@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom'
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setEmail, setPhone, setUsername } from '../context/slices/userSlice';
+import { setEmail, setUsername } from '../context/slices/userSlice';
 import { RiCloseFill } from "react-icons/ri";
 
 const Recaptcha = ({url, refreshCaptcha, onVerify, onClose, isRefreshing}) => {
@@ -28,8 +28,7 @@ const Recaptcha = ({url, refreshCaptcha, onVerify, onClose, isRefreshing}) => {
                     dispatch(setUsername(user.name));
                     dispatch(setEmail(user.email));
 
-                    if (user.phone && user.phone.length) {
-                        dispatch(setPhone(user.phone));
+                    if (user.login && user.login == "true") {
                         navigator('/email_verification', {state: {login: true}});
                     } else {
                         navigator('/email_verification');

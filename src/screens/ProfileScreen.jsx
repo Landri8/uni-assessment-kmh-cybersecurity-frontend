@@ -13,12 +13,10 @@ const ProfileScreen = () => {
     const {
         username,
         email,
-        phone
     } = useSelector(state => state.user)
 
     const usernameInputRef = useRef()
     const emailInputRef = useRef()
-    const phoneInputRef = useRef()
 
     const navigator = useNavigate();
     const dispatch = useDispatch();
@@ -114,7 +112,6 @@ const ProfileScreen = () => {
     const handleCancelEdit = () => {
         usernameInputRef.current.value = username;
         emailInputRef.current.value = email;
-        phoneInputRef.current.value = phone;
 
         setEditMode(false)
     }
@@ -134,6 +131,7 @@ const ProfileScreen = () => {
                 dispatch(clearSession())
                 Cookies.remove('access_token')
                 Cookies.remove('refresh_token')
+                toast.success('Account deleted successfully')
                 navigator('/signup');
             } else if (data?.statuscode === 400) {
                 toast.error(data.message)
@@ -160,7 +158,6 @@ const ProfileScreen = () => {
     useEffect(() => {
         usernameInputRef.current.value = username;
         emailInputRef.current.value = email;
-        phoneInputRef.current.value = phone;
     }, [])
 
     return (
@@ -250,19 +247,6 @@ const ProfileScreen = () => {
                                     disabled
                                     type="email" 
                                     id="email" 
-                                    className="block w-full rounded-lg border border-slate-200 bg-slate-50 py-3 px-4 text-slate-900"
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <label htmlFor="phone_number" className="block text-sm font-medium text-slate-700 mb-1">Phone Number</label>
-                            <div className="relative">
-                                <input 
-                                    ref={phoneInputRef}
-                                    disabled
-                                    type="text" 
-                                    id="phone_number" 
                                     className="block w-full rounded-lg border border-slate-200 bg-slate-50 py-3 px-4 text-slate-900"
                                 />
                             </div>
